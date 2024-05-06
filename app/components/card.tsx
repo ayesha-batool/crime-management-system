@@ -17,10 +17,10 @@ const Card: React.FC<CardProps> = ({ imageUrl, altText, title, description, link
      <div className="flex justify-center items-center">
       <Image src={imageUrl} alt={altText} width={100} height={100} className="h-auto align-middle" />
      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold  mb-2">{title}</h3>
+      <div className="p-6 text-white">
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="">{description}</p>
-        <Link href={link} className="mt-4 block font-bold">Learn More
+        <Link href={link} className="mt-4 block font-bold hover:text-black">Learn More
         </Link>
       </div>
     </div>

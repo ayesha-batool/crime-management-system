@@ -2,10 +2,10 @@
 
 const Header: React.FC = () => {
     return (
-      <header className="bg-gray-800 text-white p-4">
+      <header className="bg-gray-800 text-white py-2">
         <div className="container mx-auto flex justify-between items-center">
           <div>
-            <img src="/logo.svg" alt="Logo" className="h-8" />
+            <img src="/images.jpg" alt="Logo" className="h-20" />
           </div>
           <nav className="hidden md:block">
             <ul className="flex space-x-4">
