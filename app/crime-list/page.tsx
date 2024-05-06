@@ -44,14 +44,21 @@ const CrimeList: React.FC = () => {
   const handleUpdateCrime = async () => {
     try {
       if (!editCrime.id || !editCrime.title || !editCrime.description) return;
-      const updatedCrime = await updateCrime(editCrime);
+  
+      const updatedCrime = await updateCrime({
+        id: editCrime.id!,
+        title: editCrime.title!,
+        description: editCrime.description!,
+      });
+  
       const updatedCrimes = crimes.map(crime => (crime.id === updatedCrime.id ? updatedCrime : crime));
       setCrimes(updatedCrimes);
       setEditCrime({});
     } catch (error) {
-      console.error('Error updating crime:');
+      console.error('Error updating crime:', error);
     }
   };
+  
 
   return (
     <div className="container mx-auto">
