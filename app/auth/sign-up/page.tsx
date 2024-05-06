@@ -16,8 +16,8 @@ const SignUp: React.FC = () => {
       console.log('User signed up:', user);
       router.push('/'); // Redirect to home page or dashboard
     } catch (error) {
-      console.error('Sign up error:', error.message);
-      setError(error.message); // Display error message to user
+      console.error('Sign up error:');
+      setError("sign in error"); // Display error message to user
     }
   };
 

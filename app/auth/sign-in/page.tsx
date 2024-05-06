@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
       console.log('User signed in:', user);
       router.push('/'); // Redirect to home page or dashboard
     } catch (error) {
-      console.error('Sign in error:', error.message);
+      console.error('Sign in error:');
       // Handle sign-in error, e.g., show error message to user
     }
   };

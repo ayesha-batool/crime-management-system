@@ -18,7 +18,7 @@ const CrimeList: React.FC = () => {
       const data = await getAllCrimes();
       setCrimes(data);
     } catch (error) {
-      console.error('Error fetching crimes:', error.message);
+      console.error('Error fetching crimes:');
     }
   };
 
@@ -28,7 +28,7 @@ const CrimeList: React.FC = () => {
       console.log('Addedictions', addedCrime);
       setCrimes([...crimes, addedCrime]);
     } catch (error) {
-      console.error('Error adding crime:', error.message);
+      console.error('Error adding crime:');
     }
   };
 
@@ -37,7 +37,7 @@ const CrimeList: React.FC = () => {
       await deleteCrime(id);
       setCrimes(crimes.filter(crime => crime.id !== id));
     } catch (error) {
-      console.error('Error deleting crime:', error.message);
+      console.error('Error deleting crime:');
     }
   };
 
@@ -49,7 +49,7 @@ const CrimeList: React.FC = () => {
       setCrimes(updatedCrimes);
       setEditCrime({});
     } catch (error) {
-      console.error('Error updating crime:', error.message);
+      console.error('Error updating crime:');
     }
   };
 

@@ -12,7 +12,7 @@ export type User = {
 };
 
 export const getUserByEmail = async (email: string): Promise<User | null> => {
-  const { data, error } = await supabase.from<User>(TABLE_NAME).select('*').eq('email', email).single();
+  const { data, error } = await supabase.from(TABLE_NAME).select('*').eq('email', email).single();
   if (error) {
     throw error;
   }
@@ -20,7 +20,7 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 };
 
 export const createUser = async (user: { email: string; password: string }): Promise<User> => {
-  const { data, error } = await supabase.from<User>(TABLE_NAME).insert([user]).select();
+  const { data, error } = await supabase.from(TABLE_NAME).insert([user]).select();
   if (error) {
     throw error;
   }
