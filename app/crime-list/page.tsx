@@ -61,7 +61,7 @@ const CrimeList: React.FC = () => {
   
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto h-[80vh]">
       <h1 className="text-3xl font-bold mb-4">Crime List</h1>
       <CrimeForm onSubmit={handleAddCrime} />
       <ul>
