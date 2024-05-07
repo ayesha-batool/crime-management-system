@@ -9,6 +9,8 @@ export interface Crime {
   id: string;
   title: string;
   description: string;
+  user_cnic:string;
+  created_at: string;
 }
 
 export const getAllCrimes = async (): Promise<Crime[]> => {
@@ -19,7 +21,7 @@ export const getAllCrimes = async (): Promise<Crime[]> => {
   return data || [];
 };
 
-export const addCrime = async (crime: { title: string; description: string }): Promise<Crime> => {
+export const addCrime = async (crime: { title: string; description: string, user_cnic:string }): Promise<Crime> => {
   const { data, error } = await supabase.from(TABLE_NAME).insert([crime]).single();
   if (error) {
     throw error;
@@ -27,6 +29,13 @@ export const addCrime = async (crime: { title: string; description: string }): P
   return data![0];
 };
 
+export const getCrimesByCnic = async (cnic: string): Promise<Crime[]> => {
+  const { data, error } = await supabase.from(TABLE_NAME).select('*').eq('user_cnic', cnic);
+  if (error) {
+    throw error;
+  }
+  return data || [];
+};
 export const updateCrime = async (crime: { id: string; title: string; description: string }): Promise<Crime> => {
   const { data, error } = await supabase.from(TABLE_NAME).update(crime).match({ id: crime.id }).single();
   if (error) {

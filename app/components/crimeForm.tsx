@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { User, getAllUsers } from '../utils/users';
 
 type Props = {
-  onSubmit: (crime: { title: string; description: string,cnic:string }) => void;
+  onSubmit: (crime: { title: string; description: string,user_cnic:string }) => void;
 };
 
 const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
@@ -29,7 +29,7 @@ const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !description || !selectedUserCnic) return;
-    onSubmit({ title, description, cnic: selectedUserCnic });
+    onSubmit({ title, description, user_cnic: selectedUserCnic });
     setTitle('');
     setDescription('');
     setSelectedUserCnic('');
@@ -38,7 +38,7 @@ const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
       <div className="mb-4">
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+        <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Crime Title</label>
         <input
           type="text"
           id="title"
@@ -49,7 +49,7 @@ const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Crime Description</label>
         <textarea
           id="description"
           placeholder="Enter description"
