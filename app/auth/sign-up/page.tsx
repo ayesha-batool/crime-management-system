@@ -7,11 +7,13 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [cnic, setCnic] = useState('');
+
   const router = useRouter();
 
   const handleSignUp = async () => {
     try {
-      const user = await createUser({ email, password });
+      const user = await createUser({ email, password,cnic });
       // Handle successful sign-up
       console.log('User signed up:', user);
       router.push('/'); // Redirect to home page or dashboard
@@ -42,6 +44,13 @@ const SignUp: React.FC = () => {
           className="border rounded px-3 py-2 mb-2 w-full"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="CNIC"
+          className="border rounded px-3 py-2 mb-2 w-full"
+          value={cnic}
+          onChange={(e) => setCnic(e.target.value)}
         />
         <button className="bg-blue-500 text-white px-4 py-2 rounded w-full" onClick={handleSignUp}>
           Sign Up
