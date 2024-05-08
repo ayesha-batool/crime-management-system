@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { Crime, getCrimesByCnic } from '../utils/crime';
+import RequireAuth from '../components/requiredAuth';
 
 const CharacterChecker: React.FC = () => {
   const [cnic, setCnic] = useState('');
@@ -63,4 +64,4 @@ const CharacterChecker: React.FC = () => {
   );
 };
 
-export default CharacterChecker;
+export default RequireAuth(CharacterChecker);

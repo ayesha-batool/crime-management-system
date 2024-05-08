@@ -13,7 +13,7 @@ type CardProps = {
 
 const Card: React.FC<CardProps> = ({ imageUrl, altText, title, description, link }) => {
   return (
-    <div className="bg-[#140d44] text-center rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:bg-[#2a6496] hover:text-white hover:shadow-xl">
+    <div className="bg-orange-500 text-center rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:bg-[#2a6496] hover:text-white hover:shadow-xl">
      <div className="flex justify-center items-center">
       <Image src={imageUrl} alt={altText} width={100} height={100} className="h-auto align-middle" />
      </div>

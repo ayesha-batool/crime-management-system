@@ -1,17 +1,22 @@
 // components/CrimeForm.tsx
-
+"use client";
 import React, { useEffect, useState } from 'react';
 import { User, getAllUsers } from '../utils/users';
+import { Crime } from '../utils/crime';
 
 type Props = {
-  onSubmit: (crime: { title: string; description: string,user_cnic:string }) => void;
+  onSubmit: (crime: { id:string, title: string; description: string; user_cnic: string }) => void;
+  initialValues?: Partial<Crime>; // Optional initial values for editing
+  onClose?: () => void; // Optional function for closing the form (e.g., in a modal)
 };
 
-const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+const CrimeForm: React.FC<Props> = ({ onSubmit, initialValues = {}, onClose }) => {
+  const [title, setTitle] = useState(initialValues.title || '');
+  const [description, setDescription] = useState(initialValues.description || '');
+  const [id, setId] = useState(initialValues.id || '');
+
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUserCnic, setSelectedUserCnic] = useState('');
+  const [selectedUserCnic, setSelectedUserCnic] = useState(initialValues.user_cnic || '');
 
   useEffect(() => {
     fetchUsers();
@@ -27,9 +32,10 @@ const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log(title, description,"update cirme form");
     e.preventDefault();
     if (!title || !description || !selectedUserCnic) return;
-    onSubmit({ title, description, user_cnic: selectedUserCnic });
+    onSubmit({ id,title, description, user_cnic: selectedUserCnic });
     setTitle('');
     setDescription('');
     setSelectedUserCnic('');
@@ -74,7 +80,16 @@ const CrimeForm: React.FC<Props> = ({ onSubmit }) => {
           ))}
         </select>
       </div>
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">Add Crime</button>
+      <div className="flex justify-end">
+        {onClose && (
+          <button type="button" className="mr-4 bg-gray-400 text-white px-4 py-2 rounded-md" onClick={onClose}>
+            Cancel
+          </button>
+        )}
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
+          {initialValues.id ? 'Update Crime' : 'Add Crime'}
+        </button>
+      </div>
     </form>
   );
 };

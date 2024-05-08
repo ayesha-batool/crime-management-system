@@ -22,7 +22,8 @@ export const getAllCrimes = async (): Promise<Crime[]> => {
 };
 
 export const addCrime = async (crime: { title: string; description: string, user_cnic:string }): Promise<Crime> => {
-  const { data, error } = await supabase.from(TABLE_NAME).insert([crime]).single();
+  const { data, error } = await supabase.from(TABLE_NAME).insert([crime]).select('*');
+  console.log(data,"data");
   if (error) {
     throw error;
   }
@@ -37,11 +38,19 @@ export const getCrimesByCnic = async (cnic: string): Promise<Crime[]> => {
   return data || [];
 };
 export const updateCrime = async (crime: { id: string; title: string; description: string }): Promise<Crime> => {
-  const { data, error } = await supabase.from(TABLE_NAME).update(crime).match({ id: crime.id }).single();
+  const { data: updatedData, error } = await supabase.from(TABLE_NAME).update(crime).match({ id: crime.id });
   if (error) {
     throw error;
   }
-  return data!;
+  
+  // Fetch the updated crime data after the update operation
+  const { data: fetchedData, error: fetchError } = await supabase.from(TABLE_NAME).select().eq('id', crime.id);
+  if (fetchError) {
+    throw fetchError;
+  }
+  
+  // Return the updated crime data
+  return fetchedData![0]; // Assuming that only one record is updated
 };
 
 export const deleteCrime = async (id: string): Promise<void> => {

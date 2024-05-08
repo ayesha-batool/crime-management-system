@@ -1,19 +1,101 @@
-// components/Header.tsx
-
+"use client"
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Header: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // State for login status
+  const [adminLoggedIn, setAdminLoggedIn] = useState<boolean>(false); // State for admin login status
+
+  useEffect(() => {
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      if (parsedUser.email === "admin@gmail.com" && parsedUser.password === "admin") {
+        setIsLoggedIn(true);
+        setAdminLoggedIn(true);
+      } else {
+        setIsLoggedIn(true);
+      }
+    }
+  }, [isLoggedIn]); // Run effect only once on component mount
+  useEffect(() => {
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      if (parsedUser.email === "admin@gmail.com" && parsedUser.password === "admin") {
+        setIsLoggedIn(true);
+        setAdminLoggedIn(true);
+      } else {
+        setIsLoggedIn(true);
+        setAdminLoggedIn(false);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setAdminLoggedIn(false);
+    }
+  }, [isLoggedIn]);
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser"); // Remove user from localStorage
+    setIsLoggedIn(false); // Update login state
+    setAdminLoggedIn(false); // Update admin login state
+    window.location.href = "/"; // Redirect to homepage
+  };
+
+  const loggedInMenu = {
+    "Missing Person": "/missing-persons",
+    "Wanted Person": "/wanted-persons",
+    "Checker": "/character-checker",
+    "Report Crime": "/crime-list",
+    ...(adminLoggedIn && {
+      "Add Missing Person": "/add-missing-person",
+      "Add Wanted Person": "/add-wanted-person",
+    }),
+  };
+
+  const notLoggedInMenu = {
+    "Women Help": "/women-help",
+    "Safety Tips": "/safety-tips",
+    "FAQs": "/faq",
+    "Sign In": "/auth/sign-in",
+  };
+
   return (
-    <header className="bg-gray-800 text-white py-2">
+    <header className="bg-orange-500 text-white py-2">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href={"/"}>
+        <Link href="/">
           <img src="/images.jpg" alt="Logo" className="h-20" />
         </Link>
         <nav className="hidden md:block">
-          <ul className="flex space-x-4">
-            <li><Link href="/women-help" className="hover:text-gray-500">Women Help</Link></li>
-            <li><Link href="/safety-tips" className="hover:text-gray-500">Safety Tips</Link></li>
-            <li><Link href="/faq" className="hover:text-gray-500">FAQs</Link></li>
+          <ul className="flex space-x-4 items-center">
+            {isLoggedIn ? (
+              <>
+                {/* Loop through logged-in menu items */}
+                {Object.entries(loggedInMenu).map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+                {/* Logout button for logged-in users */}
+                <li>
+                  <button onClick={handleLogout} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out">
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                {/* Loop through non-logged-in menu items */}
+                {Object.entries(notLoggedInMenu).map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </>
+            )}
           </ul>
         </nav>
         <div className="md:hidden">

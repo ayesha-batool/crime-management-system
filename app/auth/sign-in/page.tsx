@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { getUserByEmail } from '../../utils/users';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +25,11 @@ const SignIn: React.FC = () => {
       }
 
       // Handle successful sign-in
-      console.log('User signed in:', user);
+      toast.success(
+        "user signed in successfully"
+      )
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+
       router.push('/'); // Redirect to home page or dashboard
     } catch (error) {
       console.error('Sign in error:');
@@ -34,7 +39,7 @@ const SignIn: React.FC = () => {
 
   return (
     <div
-    className="min-h-screen bg-cover bg-center flex items-center justify-center"
+    className="min-h-screen bg-cover bg-center flex items-center justify-center text-black"
     style={{ backgroundImage: "url('/path/to/background-image.jpg')" }}
   >
     <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">

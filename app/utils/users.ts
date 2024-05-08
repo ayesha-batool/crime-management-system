@@ -13,11 +13,12 @@ export type User = {
 };
 
 export const getUserByEmail = async (email: string): Promise<User | null> => {
-  const { data, error } = await supabase.from(TABLE_NAME).select('*').eq('email', email).single();
+  const { data, error } = await supabase.from(TABLE_NAME).select('*').eq('email', email).limit(1);
+  console.log(data,"user");
   if (error) {
     throw error;
   }
-  return data || null;
+  return data[0] || null;
 };
 
 export const createUser = async (user: { email: string; password: string, cnic: string }): Promise<User> => {
