@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { addWantedPerson, WantedPerson } from '../utils/wantedPersons'; // Import the function to add a wanted person
 import { useRouter } from 'next/navigation';
+import RequireAuth from '../components/requiredAuth';
 
 const AddWantedPersonPage: React.FC = () => {
   const router = useRouter();
@@ -85,4 +86,4 @@ const AddWantedPersonPage: React.FC = () => {
   );
 };
 
-export default AddWantedPersonPage;
+export default RequireAuth(AddWantedPersonPage);

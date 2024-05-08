@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { WantedPerson, searchWantedPersons } from '../utils/wantedPersons';
+import RequireAuth from '../components/requiredAuth';
 
 const WantedPersonsPage: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -66,4 +67,4 @@ const WantedPersonsPage: React.FC = () => {
   );
 };
 
-export default WantedPersonsPage;
+export default RequireAuth(WantedPersonsPage);

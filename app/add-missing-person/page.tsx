@@ -4,6 +4,7 @@ import { addMissingPerson, MissingPerson } from '../utils/missingPersons';
 import { toast } from 'react-toastify';
 import MissingPersonForm from '../components/missingPersonForm';
 import { useRouter } from 'next/navigation';
+import RequireAuth from '../components/requiredAuth';
 
 const AddMissingPersonPage: React.FC = () => {
   const router = useRouter();
@@ -37,4 +38,4 @@ const AddMissingPersonPage: React.FC = () => {
   );
 };
 
-export default AddMissingPersonPage;
+export default RequireAuth(AddMissingPersonPage);

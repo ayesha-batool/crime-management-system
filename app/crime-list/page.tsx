@@ -5,6 +5,7 @@ import { getAllCrimes, addCrime, updateCrime, deleteCrime, Crime } from '../util
 import CrimeForm from '../components/crimeForm';
 import CrimeListItem from '../components/crimeListItem';
 import { toast } from 'react-toastify';
+import RequireAuth from '../components/requiredAuth';
 
 const CrimeList: React.FC = () => {
   const [crimes, setCrimes] = useState<Crime[]>([]);
@@ -100,4 +101,4 @@ const CrimeList: React.FC = () => {
   );
 };
 
-export default CrimeList;
+export default RequireAuth(CrimeList);

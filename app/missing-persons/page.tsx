@@ -4,6 +4,7 @@ import MissingPersonForm from '../components/missingPersonForm';
 import { getLoggedInUserEmail } from '../utils/auth';
 import { deleteMissingPerson, MissingPerson, searchMissingPersons, updateMissingPerson } from '../utils/missingPersons';
 import { toast } from 'react-toastify';
+import RequireAuth from '../components/requiredAuth';
 
 // Rest of the imports remain the same
 
@@ -138,4 +139,4 @@ const MissingPersonsPage: React.FC = () => {
   );
 };
 
-export default MissingPersonsPage;
+export default RequireAuth(MissingPersonsPage);
