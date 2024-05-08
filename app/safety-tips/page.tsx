@@ -2,7 +2,7 @@
 
 const SafetyTipsPage: React.FC = () => {
     return (
-      <div className="max-w-2xl mx-auto py-8 px-4">
+      <div className="max-w-2xl mx-auto py-8 px-4 text-white">
         <h1 className="text-3xl font-semibold mb-4">Safety Tips</h1>
         <div className="space-y-4">
           <div className="bg-gray-100 p-4 rounded-lg">

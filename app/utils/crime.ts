@@ -6,7 +6,7 @@ import supabase from "./supabase";
 const TABLE_NAME = 'crimes';
 
 export interface Crime {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   user_cnic:string;
@@ -21,7 +21,7 @@ export const getAllCrimes = async (): Promise<Crime[]> => {
   return data || [];
 };
 
-export const addCrime = async (crime: { title: string; description: string, user_cnic:string }): Promise<Crime> => {
+export const addCrime = async (crime:Partial<Crime>): Promise<Crime> => {
   const { data, error } = await supabase.from(TABLE_NAME).insert([crime]).select('*');
   console.log(data,"data");
   if (error) {

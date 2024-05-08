@@ -72,7 +72,7 @@ const Header: React.FC = () => {
                 {/* Loop through logged-in menu items */}
                 {Object.entries(loggedInMenu).map(([label, href]) => (
                   <li key={label}>
-                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out">
+                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out text-sm">
                       {label}
                     </Link>
                   </li>
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
                 {/* Loop through non-logged-in menu items */}
                 {Object.entries(notLoggedInMenu).map(([label, href]) => (
                   <li key={label}>
-                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out">
+                    <Link href={href} className="px-3 py-2 hover:bg-orange-600 transition duration-200 ease-in-out text-sm">
                       {label}
                     </Link>
                   </li>

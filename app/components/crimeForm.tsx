@@ -5,7 +5,7 @@ import { User, getAllUsers } from '../utils/users';
 import { Crime } from '../utils/crime';
 
 type Props = {
-  onSubmit: (crime: { id:string, title: string; description: string; user_cnic: string }) => void;
+  onSubmit: (crime: { id?:string,title: string; description: string; user_cnic: string }) => void;
   initialValues?: Partial<Crime>; // Optional initial values for editing
   onClose?: () => void; // Optional function for closing the form (e.g., in a modal)
 };
@@ -30,16 +30,38 @@ const CrimeForm: React.FC<Props> = ({ onSubmit, initialValues = {}, onClose }) =
       console.error('Error fetching users:');
     }
   };
-
+  
   const handleSubmit = (e: React.FormEvent) => {
-    console.log(title, description,"update cirme form");
     e.preventDefault();
-    if (!title || !description || !selectedUserCnic) return;
-    onSubmit({ id,title, description, user_cnic: selectedUserCnic });
+    console.log(title, description, "update crime form");
+  
+    // Check if title, description, and selectedUserCnic are not empty
+    if (!title || !description || !selectedUserCnic) {
+      return;
+    }
+  
+    // Construct the form data
+    const formData: Partial<Crime> = {
+      title: title || '', // Ensure title is not undefined
+      description: description || '', // Ensure description is not undefined
+      user_cnic: selectedUserCnic || '', // Ensure user_cnic is not undefined
+    };
+  
+    // Conditionally include the id in the form data
+    if (initialValues.id) {
+      formData.id = initialValues.id;
+    }
+  
+    // Call onSubmit with the constructed form data
+    onSubmit(formData);
+  
+    // Reset the form fields
     setTitle('');
     setDescription('');
     setSelectedUserCnic('');
   };
+  
+  
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">

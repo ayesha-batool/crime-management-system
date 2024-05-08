@@ -26,6 +26,7 @@ const CrimeList: React.FC = () => {
 
   const handleAddCrime = async (crime: { title: string; description: string,user_cnic:string }) => {
     try {
+      console.log("Adding",crime);
       const addedCrime = await addCrime(crime);
       toast.success('Crime added successfully');
       setCrimes([...crimes, addedCrime]);
@@ -74,6 +75,8 @@ const CrimeList: React.FC = () => {
     <div className="container mx-auto my-4 min-h-[80vh]">
     <h1 className="text-3xl font-bold mb-4 text-center">Add Crime</h1>
     <CrimeForm onSubmit={handleAddCrime} />
+    <h1 className="text-3xl font-bold my-4 text-center">Reported Crimes</h1>
+
     <ul>
       {crimes.map(crime => (
         <CrimeListItem

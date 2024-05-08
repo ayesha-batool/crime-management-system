@@ -28,14 +28,8 @@ const WomenHelpPage: React.FC = () => {
         {/* Section 3: File a Complaint */}
         <section>
           <h2 className="text-xl font-semibold mb-4">File a Complaint</h2>
-          <p className="mb-4">If you have been a victim of harassment or violence, you can file a complaint by contacting the police or using the online complaint form below:</p>
-          <form>
-            <div className="mb-4">
-              <label htmlFor="complaint">Complaint Description:</label>
-              <textarea id="complaint" className="block w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" rows={4}></textarea>
-            </div>
-            <button type="submit" className="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 transition duration-300">Submit Complaint</button>
-          </form>
+          <p className="mb-4">If you have been a victim of harassment or violence, you can file a complaint by contacting the police or using the online complaintportal</p>
+          
         </section>
       </div>
     );
